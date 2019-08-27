@@ -1,23 +1,71 @@
-import { NgModule } from '@angular/core';
+import {ErrorHandler, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouteReuseStrategy } from '@angular/router';
+import {AppComponent} from './app.component';
 
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { AboutPage } from './about/about';
+import { ContactPage } from './contact/contact';
+import { HomePage } from './home/home';
+import { TabsPage } from './tabs/tabs';
+import { GuidePage } from './guide/guide';
+import { HotelsPage } from './hotels/hotels';
+import { TripPage } from './trip/trip';
 
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
+import {GoogleMapComponent} from './google-map/google-map';
+import {IonicModule, IonicRouteStrategy} from '@ionic/angular';
+import {RouteReuseStrategy} from '@angular/router';
+import {Geolocation} from '@ionic-native/geolocation/ngx';
+import { GoogleMaps } from '@ionic-native/google-maps';
+import {SplashScreen} from '@ionic-native/splash-screen';
+
+
+
+const firebaseAuth = {
+  apiKey: 'AIzaSyDBTmTcZ9UP84Bc2aJvPj6XMPx0GLEthXU',
+  authDomain: 'tourism-fc983.firebaseapp.com',
+  databaseURL: 'https://tourism-fc983.firebaseio.com',
+  projectId: 'tourism-fc983',
+  storageBucket: 'tourism-fc983.appspot.com',
+  messagingSenderId: '23590154204'
+};
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+  declarations: [
+    AppComponent,
+    AboutPage,
+    ContactPage,
+    HomePage,
+    TabsPage,
+   //  GuidePage,
+   //  HotelsPage,
+   //  TripPage,
+   GoogleMapComponent
+
   ],
-  bootstrap: [AppComponent]
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    // AngularFireModule.initializeApp(firebaseAuth)
+  ],
+  bootstrap: [AppComponent],
+  entryComponents: [
+    AppComponent,
+    AboutPage,
+    ContactPage,
+    HomePage,
+    TabsPage,
+    GuidePage,
+    HotelsPage,
+    TripPage
+
+  ],
+  providers: [
+    Geolocation,
+    GoogleMaps,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    // statusbar,
+    // SplashScreen,
+    // Geolocation,
+    // {provide: ErrorHandler, useClass: IonicErrorHandler}
+  ]
 })
 export class AppModule {}
